@@ -1,0 +1,29 @@
+.element {
+  width: 700px;
+  .shoppingListWrapper {
+    .icons {
+      display: flex;
+      margin-bottom: 20px;
+      svg {
+        width: 40px;
+        height: 40px;
+        path:nth-child(1) {
+          stroke: white;
+        }
+      }
+      svg:nth-child(1) {
+        transform: translateX(125px);
+      }
+
+      svg:nth-child(2) {
+        fill: white;
+        transform: translateX(475px);
+      }
+    }
+
+    .shoppingList {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

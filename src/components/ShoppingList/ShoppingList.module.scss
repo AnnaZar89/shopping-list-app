@@ -1,0 +1,85 @@
+.element {
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+  color: rgb(146, 137, 137);
+  font-size: 17px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-weight: 500;
+  line-height: 25px;
+  letter-spacing: 1px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  overflow-y: auto;
+
+  .product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+
+    .x {
+      color: transparent;
+      text-shadow: 0 0 0 red;
+      font-size: 15px;
+      text-align: end;
+      cursor: pointer;
+    }
+
+    label > input[type="checkbox"] {
+      display: none;
+    }
+
+    label > input[type="checkbox"] + ::before {
+      content: "";
+      display: inline-block;
+      width: 21px;
+      height: 21px;
+      border-radius: 10%;
+      border: 2px solid pink;
+      box-shadow: rgba(240, 46, 170, 0.4) -5px 5px,
+        rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px,
+        rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+
+      vertical-align: middle;
+      margin-right: 15px;
+      cursor: pointer;
+    }
+
+    label > input[type="checkbox"]:checked + ::before {
+      content: "✓";
+      color: white;
+      text-align: center;
+      background: rgb(251 113 133);
+      border-color: rgb(251 113 133);
+      line-height: 20px;
+      cursor: pointer;
+    }
+
+    p {
+      width: 100%;
+      word-break: break-all;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+  height: 20px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  border: solid 20px transparent;
+  margin-left: 30px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffb0be;
+  border-radius: 26px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
