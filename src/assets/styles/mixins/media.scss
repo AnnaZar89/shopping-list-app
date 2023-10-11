@@ -1,0 +1,13 @@
+@import "./breakpoints.modules.scss";
+
+@mixin media($name) {
+  $width: map-get($breakpoints, $name);
+  @debug ($width);
+  @if $width {
+    @media screen and (min-width: #{$width}px) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

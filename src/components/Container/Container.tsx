@@ -9,6 +9,11 @@ const Container = () => {
   const storedItems = JSON.parse(localStorage.getItem("shopping-list-app"));
   const [items, setProduct] = useState(storedItems);
 
+  const removeFromStorage = () => {
+    localStorage.clear();
+    setProduct([]);
+  };
+
   useEffect(() => {
     localStorage.setItem("shopping-list-app", JSON.stringify(items));
   }, [items]);
@@ -36,7 +41,10 @@ const Container = () => {
 
   return (
     <div className={styles.element}>
-      <SearchBar onAddItems={addProducts} />
+      <SearchBar
+        onAddItems={addProducts}
+        removeFromStorage={removeFromStorage}
+      />
       <div className={styles.shoppingListWrapper}>
         <div className={styles.icons}>
           <ProductList />

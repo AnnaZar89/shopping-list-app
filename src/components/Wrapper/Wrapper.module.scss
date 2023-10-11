@@ -1,16 +1,19 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import "../../assets/styles/mixing.scss";
+@import "../../assets/styles/mixins/media.scss";
+
 .element {
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  height: 150vh;
+  overflow-x: hidden;
   background-color: #5de6de;
   background-image: linear-gradient(315deg, #5de6de 0%, #b58ecc 74%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @include media("xl") {
+    height: 100vh;
+    overflow: hidden;
+  }
 }

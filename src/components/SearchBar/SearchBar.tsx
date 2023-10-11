@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./SearchBar.module.scss";
 
 export interface INewItem {
@@ -7,16 +7,13 @@ export interface INewItem {
   id: {};
   quantity: number;
 }
-const SearchBar = ({ onAddItems }) => {
+const SearchBar = ({ onAddItems, removeFromStorage }) => {
   const [value, setValue] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  useEffect(() => {
-    localStorage.setItem("product", value);
-  }, [value]);
-
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (!value) return;
     const newItem: INewItem = {
       value,
       checked: false,
@@ -29,8 +26,8 @@ const SearchBar = ({ onAddItems }) => {
   };
 
   return (
-    <>
-      <form className={styles.element} onSubmit={handleSubmit}>
+    <form className={styles.element} onSubmit={handleSubmit}>
+      <div className={styles.searchBar}>
         <select
           onChange={(e) => setQuantity(Number(e.target.value))}
           value={quantity}
@@ -47,10 +44,12 @@ const SearchBar = ({ onAddItems }) => {
           onChange={(e) => setValue(e.target.value)}
           value={value}
         />
+      </div>
+      <div className={styles.buttons}>
         <button>Add to the list</button>
-        <button>Delete all</button>
-      </form>
-    </>
+        <button onClick={removeFromStorage}>Delete all</button>
+      </div>
+    </form>
   );
 };
 
