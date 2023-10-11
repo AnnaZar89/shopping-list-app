@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import ShoppingList from "../ShoppingList/ShoppingList";
 import styles from "./Container.module.scss";
@@ -6,18 +6,23 @@ import { ReactComponent as ShoppingCart } from "../../assets/icons/shopping-cart
 import { ReactComponent as ProductList } from "../../assets/icons/list.svg";
 
 const Container = () => {
-  const [items, setItem] = useState([]);
+  const storedItems = JSON.parse(localStorage.getItem("shopping-list-app"));
+  const [items, setProduct] = useState(storedItems);
+
+  useEffect(() => {
+    localStorage.setItem("shopping-list-app", JSON.stringify(items));
+  }, [items]);
 
   const addProducts = (product: {}) => {
-    setItem((items) => [...items, product]);
+    setProduct((items) => [...items, product]);
   };
 
   const deleteProducts = (id: {}) => {
-    setItem((items) => items.filter((item) => item.id !== id));
+    setProduct((items) => items.filter((item) => item.id !== id));
   };
 
   const checkProduct = (val) => {
-    setItem((items) =>
+    setProduct((items) =>
       items.map((item) =>
         item.id === val
           ? { ...item, checked: !item.checked }
