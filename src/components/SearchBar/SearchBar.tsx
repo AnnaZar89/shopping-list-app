@@ -7,7 +7,7 @@ export interface INewItem {
   id: {};
   quantity: number;
 }
-const SearchBar = ({ onAddItems, removeFromStorage }) => {
+const SearchBar = ({ onAddItems, removeFromStorage, showList }) => {
   const [value, setValue] = useState("");
   const [quantity, setQuantity] = useState(1);
 
@@ -23,6 +23,7 @@ const SearchBar = ({ onAddItems, removeFromStorage }) => {
     onAddItems(newItem);
     setQuantity(1);
     setValue("");
+    showList(true);
   };
 
   return (

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styles from "./ShoppingList.module.scss";
+import cn from "classnames";
 
 type Product = {
   value: string;
@@ -13,21 +14,31 @@ interface IShoppingList {
   onDeleteItems: (Date) => void;
   setCheckboxValue: (boolean) => void;
   checkboxChecked?: boolean;
+  list?: boolean;
+  productInCart?: boolean;
 }
 const ShoppingList: FC<IShoppingList> = ({
   items,
   onDeleteItems,
   setCheckboxValue,
   checkboxChecked,
+  list,
+  productInCart,
 }) => {
   return (
-    <div className={styles.element}>
+    <div
+      className={cn(
+        styles.element,
+        list ? styles.active : styles.hide,
+        productInCart ? styles.active : styles.hide
+      )}
+    >
       {items.map((item, id) => (
         <div className={styles.product} key={id}>
           <label className={styles.checkboxStyled}>
             <input
               type="checkbox"
-              onChange={(e) => setCheckboxValue(item.id)}
+              onChange={() => setCheckboxValue(item.id)}
               checked={checkboxChecked}
               id="check"
             />
