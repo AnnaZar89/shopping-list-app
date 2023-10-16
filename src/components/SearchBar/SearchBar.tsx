@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "./SearchBar.module.scss";
 
 export interface INewItem {
@@ -11,7 +11,7 @@ const SearchBar = ({ onAddItems, removeFromStorage, showList }) => {
   const [value, setValue] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value) return;
     const newItem: INewItem = {
