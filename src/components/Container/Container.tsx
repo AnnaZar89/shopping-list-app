@@ -10,12 +10,10 @@ const Container = () => {
   const [list, showList] = useState<boolean>(false);
   const [productsInCart, showProductsInCart] = useState<boolean>(false);
 
-  const checkedTrue = items.filter(
-    (element: Product) => element.checked === true
-  );
-  const checkedFalse = items.filter(
-    (element: Product) => element.checked === false
-  );
+  const checkedTrue =
+    items && items.filter((element: Product) => element.checked === true);
+  const checkedFalse =
+    items && items.filter((element: Product) => element.checked === false);
 
   const removeFromStorage = () => {
     localStorage.clear();
@@ -24,14 +22,14 @@ const Container = () => {
 
   useEffect(() => {
     localStorage.setItem("shopping-list-app", JSON.stringify(items));
-    if (checkedTrue.length === 0) {
+    if (checkedTrue?.length === 0) {
       showProductsInCart(false);
-    } else if (checkedTrue.length !== 0) {
+    } else if (checkedTrue?.length !== 0) {
       showProductsInCart(true);
     }
-    if (checkedFalse.length === 0) {
+    if (checkedFalse?.length === 0 || null) {
       showList(false);
-    } else if (checkedFalse.length !== 0) {
+    } else if (checkedFalse?.length !== 0) {
       showList(true);
     }
   }, [items, checkedTrue, checkedFalse]);

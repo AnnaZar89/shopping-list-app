@@ -22,7 +22,7 @@ const ShoppingList: FC<IShoppingList> = ({
 }) => {
   return (
     <div className={styles.element}>
-      {items.map((item, id) => (
+      {items?.map((item, id) => (
         <div className={styles.product} key={id}>
           <label className={styles.checkboxStyled}>
             <input
