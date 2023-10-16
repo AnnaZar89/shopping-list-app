@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import ShoppingList from "../ShoppingList/ShoppingList";
 import styles from "./Container.module.scss";
-import { ReactComponent as ShoppingCart } from "../../assets/icons/shopping-cart.svg";
-import { ReactComponent as ProductList } from "../../assets/icons/list.svg";
+import { Product } from "../ShoppingList/ShoppingList";
 
 const Container = () => {
   const storedItems = JSON.parse(localStorage.getItem("shopping-list-app"));
   const [items, setProduct] = useState(storedItems);
-  const [list, showList] = useState(false);
-  const [productsInCart, showProductsInCart] = useState(false);
+  const [list, showList] = useState<boolean>(false);
+  const [productsInCart, showProductsInCart] = useState<boolean>(false);
 
-  const checkedTrue = items.filter((element) => element.checked === true);
-  const checkedFalse = items.filter((element) => element.checked === false);
+  const checkedTrue = items.filter(
+    (element: Product) => element.checked === true
+  );
+  const checkedFalse = items.filter(
+    (element: Product) => element.checked === false
+  );
 
   const removeFromStorage = () => {
     localStorage.clear();
@@ -38,12 +41,14 @@ const Container = () => {
   };
 
   const deleteProducts = (id: {}) => {
-    setProduct((items) => items.filter((item) => item.id !== id));
+    setProduct((items: Product[]) =>
+      items.filter((item: Product) => item.id !== id)
+    );
   };
 
-  const checkProduct = (val) => {
-    setProduct((items) =>
-      items.map((item) =>
+  const checkProduct = (val: Date) => {
+    setProduct((items: Product[]) =>
+      items.map((item: Product) =>
         item.id === val
           ? { ...item, checked: !item.checked }
           : { ...item, checked: item.checked }
@@ -59,25 +64,23 @@ const Container = () => {
         showList={() => showList(list !== true ? !list : list)}
       />
       <div className={styles.shoppingListWrapper}>
-        <div className={styles.icons}>
-          <ProductList onClick={() => showList(!list)} />
-          <ShoppingCart onClick={() => showProductsInCart(!productsInCart)} />
-        </div>
         <div className={styles.shoppingList}>
-          <ShoppingList
-            items={checkedFalse}
-            onDeleteItems={deleteProducts}
-            setCheckboxValue={checkProduct}
-            checkboxChecked={false}
-            list={list}
-          />
-          <ShoppingList
-            items={checkedTrue}
-            onDeleteItems={deleteProducts}
-            setCheckboxValue={checkProduct}
-            checkboxChecked={true}
-            productInCart={productsInCart}
-          />
+          {list && (
+            <ShoppingList
+              items={checkedFalse}
+              onDeleteItems={deleteProducts}
+              setCheckboxValue={checkProduct}
+              checkboxChecked={false}
+            />
+          )}
+          {productsInCart && (
+            <ShoppingList
+              items={checkedTrue}
+              onDeleteItems={deleteProducts}
+              setCheckboxValue={checkProduct}
+              checkboxChecked={true}
+            />
+          )}
         </div>
       </div>
     </div>
