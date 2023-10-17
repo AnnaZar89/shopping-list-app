@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import styles from "./SearchBar.module.scss";
 
 export interface INewItem {
@@ -7,7 +7,17 @@ export interface INewItem {
   id: {};
   quantity: number;
 }
-const SearchBar = ({ onAddItems, removeFromStorage, showList }) => {
+
+interface ISearchBar {
+  onAddItems: (product: INewItem) => void;
+  removeFromStorage: () => void;
+  showList: (list: boolean) => void;
+}
+const SearchBar: FC<ISearchBar> = ({
+  onAddItems,
+  removeFromStorage,
+  showList,
+}) => {
   const [value, setValue] = useState("");
   const [quantity, setQuantity] = useState(1);
 
@@ -44,6 +54,7 @@ const SearchBar = ({ onAddItems, removeFromStorage, showList }) => {
           placeholder="search product..."
           onChange={(e) => setValue(e.target.value)}
           value={value}
+          autoComplete="off"
         />
       </div>
       <div className={styles.buttons}>

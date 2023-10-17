@@ -4,16 +4,15 @@ import ShoppingList from "../ShoppingList/ShoppingList";
 import styles from "./Container.module.scss";
 import { Product } from "../ShoppingList/ShoppingList";
 
+const checkedTrueFalse = (array: Product[], value: boolean) => {
+  return array.filter((element) => element.checked === value);
+};
+
 const Container = () => {
-  const storedItems = JSON.parse(localStorage.getItem("shopping-list-app"));
+  let storedItems = JSON.parse(localStorage.getItem("shopping-list-app"));
   const [items, setProduct] = useState(storedItems);
   const [list, showList] = useState<boolean>(false);
   const [productsInCart, showProductsInCart] = useState<boolean>(false);
-
-  const checkedTrue =
-    items && items.filter((element: Product) => element.checked === true);
-  const checkedFalse =
-    items && items.filter((element: Product) => element.checked === false);
 
   const removeFromStorage = () => {
     localStorage.clear();
@@ -22,23 +21,23 @@ const Container = () => {
 
   useEffect(() => {
     localStorage.setItem("shopping-list-app", JSON.stringify(items));
-    if (checkedTrue?.length === 0) {
+    if (checkedTrueFalse(items, true)?.length === 0) {
       showProductsInCart(false);
-    } else if (checkedTrue?.length !== 0) {
+    } else if (checkedTrueFalse(items, true)?.length !== 0) {
       showProductsInCart(true);
     }
-    if (checkedFalse?.length === 0 || null) {
+    if (checkedTrueFalse(items, false)?.length === 0 || null) {
       showList(false);
-    } else if (checkedFalse?.length !== 0) {
+    } else if (checkedTrueFalse(items, false)?.length !== 0) {
       showList(true);
     }
-  }, [items, checkedTrue, checkedFalse]);
+  }, [items]);
 
   const addProducts = (product: {}) => {
-    setProduct((items) => [...items, product]);
+    setProduct((items: Product[]) => [...items, product]);
   };
 
-  const deleteProducts = (id: {}) => {
+  const deleteProducts = (id: Date) => {
     setProduct((items: Product[]) =>
       items.filter((item: Product) => item.id !== id)
     );
@@ -65,7 +64,7 @@ const Container = () => {
         <div className={styles.shoppingList}>
           {list && (
             <ShoppingList
-              items={checkedFalse}
+              items={checkedTrueFalse(items, false)}
               onDeleteItems={deleteProducts}
               setCheckboxValue={checkProduct}
               checkboxChecked={false}
@@ -73,7 +72,7 @@ const Container = () => {
           )}
           {productsInCart && (
             <ShoppingList
-              items={checkedTrue}
+              items={checkedTrueFalse(items, true)}
               onDeleteItems={deleteProducts}
               setCheckboxValue={checkProduct}
               checkboxChecked={true}

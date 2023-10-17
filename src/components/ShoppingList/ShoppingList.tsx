@@ -10,8 +10,8 @@ export type Product = {
 
 interface IShoppingList {
   items: Product[];
-  onDeleteItems: (Date) => void;
-  setCheckboxValue: (boolean) => void;
+  onDeleteItems: (value: Date) => void;
+  setCheckboxValue: (value: Date) => void;
   checkboxChecked?: boolean;
 }
 const ShoppingList: FC<IShoppingList> = ({
