@@ -5,7 +5,7 @@ import styles from "./Container.module.scss";
 import { Product } from "../ShoppingList/ShoppingList";
 
 const checkedTrueFalse = (array: Product[], value: boolean) => {
-  return array.filter((element) => element.checked === value);
+  return array && array.filter((element) => element.checked === value);
 };
 
 const Container = () => {
