@@ -11,13 +11,8 @@ export interface INewItem {
 interface ISearchBar {
   onAddItems: (product: INewItem) => void;
   removeFromStorage: () => void;
-  showList: (list: boolean) => void;
 }
-const SearchBar: FC<ISearchBar> = ({
-  onAddItems,
-  removeFromStorage,
-  showList,
-}) => {
+const SearchBar: FC<ISearchBar> = ({ onAddItems, removeFromStorage }) => {
   const [value, setValue] = useState("");
   const [quantity, setQuantity] = useState(1);
 
@@ -33,7 +28,6 @@ const SearchBar: FC<ISearchBar> = ({
     onAddItems(newItem);
     setQuantity(1);
     setValue("");
-    showList(true);
   };
 
   return (

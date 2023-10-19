@@ -11,8 +11,6 @@ const checkedTrueFalse = (array: Product[], value: boolean) => {
 const Container = () => {
   let storedItems = JSON.parse(localStorage.getItem("shopping-list-app"));
   const [items, setProduct] = useState(storedItems);
-  const [list, showList] = useState<boolean>(false);
-  const [productsInCart, showProductsInCart] = useState<boolean>(false);
 
   const removeFromStorage = () => {
     localStorage.clear();
@@ -21,16 +19,6 @@ const Container = () => {
 
   useEffect(() => {
     localStorage.setItem("shopping-list-app", JSON.stringify(items));
-    if (checkedTrueFalse(items, true)?.length === 0) {
-      showProductsInCart(false);
-    } else if (checkedTrueFalse(items, true)?.length !== 0) {
-      showProductsInCart(true);
-    }
-    if (checkedTrueFalse(items, false)?.length === 0 || null) {
-      showList(false);
-    } else if (checkedTrueFalse(items, false)?.length !== 0) {
-      showList(true);
-    }
   }, [items]);
 
   const addProducts = (product: {}) => {
@@ -58,11 +46,10 @@ const Container = () => {
       <SearchBar
         onAddItems={addProducts}
         removeFromStorage={removeFromStorage}
-        showList={() => showList(list !== true ? !list : list)}
       />
       <div className={styles.shoppingListWrapper}>
         <div className={styles.shoppingList}>
-          {list && (
+          {checkedTrueFalse(items, false).length !== 0 && (
             <ShoppingList
               items={checkedTrueFalse(items, false)}
               onDeleteItems={deleteProducts}
@@ -70,7 +57,7 @@ const Container = () => {
               checkboxChecked={false}
             />
           )}
-          {productsInCart && (
+          {checkedTrueFalse(items, true).length !== 0 && (
             <ShoppingList
               items={checkedTrueFalse(items, true)}
               onDeleteItems={deleteProducts}
