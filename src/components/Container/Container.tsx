@@ -49,7 +49,7 @@ const Container = () => {
       />
       <div className={styles.shoppingListWrapper}>
         <div className={styles.shoppingList}>
-          {checkedTrueFalse(items, false).length !== 0 && (
+          {items && checkedTrueFalse(items, false).length !== 0 && (
             <ShoppingList
               items={checkedTrueFalse(items, false)}
               onDeleteItems={deleteProducts}
@@ -57,7 +57,7 @@ const Container = () => {
               checkboxChecked={false}
             />
           )}
-          {checkedTrueFalse(items, true).length !== 0 && (
+          {items && checkedTrueFalse(items, true).length !== 0 && (
             <ShoppingList
               items={checkedTrueFalse(items, true)}
               onDeleteItems={deleteProducts}
