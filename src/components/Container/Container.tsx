@@ -13,8 +13,11 @@ const Container = () => {
   const [items, setProduct] = useState(storedItems);
 
   const removeFromStorage = () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete all items?"
+    );
     localStorage.clear();
-    setProduct([]);
+    if (confirmed) setProduct([]);
   };
 
   useEffect(() => {

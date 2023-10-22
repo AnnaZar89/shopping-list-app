@@ -45,7 +45,7 @@ const SearchBar: FC<ISearchBar> = ({ onAddItems, removeFromStorage }) => {
         </select>
         <input
           type="text"
-          placeholder="search product..."
+          placeholder="add product..."
           onChange={(e) => setValue(e.target.value)}
           value={value}
           autoComplete="off"
