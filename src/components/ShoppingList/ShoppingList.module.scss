@@ -1,10 +1,11 @@
+@import "../../assets/styles/mixing.scss";
+@import "../../assets/styles/mixins/media.scss";
+
 .element {
-  width: 300px;
-  // height: 400px;
-  height: 350px;
+  width: 95vw;
   background-color: white;
   border-radius: 20px;
-  padding: 30px;
+  padding: 50px;
   color: rgb(146, 137, 137);
   font-size: 17px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -16,6 +17,14 @@
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
   overflow-y: auto;
 
+  @include media("sm") {
+    width: 500px;
+  }
+
+  @include media("lg") {
+    height: 350px;
+    padding: 30px;
+  }
   .product {
     display: flex;
     align-items: center;
