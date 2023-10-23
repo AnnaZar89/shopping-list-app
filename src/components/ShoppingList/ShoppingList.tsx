@@ -6,6 +6,7 @@ export type Product = {
   checked: boolean;
   id: Date;
   quantity: number;
+  unit: string;
 };
 
 interface IShoppingList {
@@ -33,9 +34,9 @@ const ShoppingList: FC<IShoppingList> = ({
             />
             <span className={styles.checkboxNew}></span>
           </label>
-          <p>
-            {item.quantity} {item.value}
-          </p>
+          <p>{item.value}</p>
+          <p>{item.quantity}</p>
+          <p>{item.unit}</p>
           <div onClick={() => onDeleteItems(item.id)} className={styles.x}>
             ❌
           </div>

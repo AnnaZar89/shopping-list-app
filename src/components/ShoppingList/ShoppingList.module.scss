@@ -5,7 +5,8 @@
   width: 95vw;
   background-color: white;
   border-radius: 20px;
-  padding: 50px;
+  // padding: 50px;
+  padding: 20px;
   color: rgb(146, 137, 137);
   font-size: 17px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -19,6 +20,7 @@
 
   @include media("sm") {
     width: 500px;
+    padding: 50px;
   }
 
   @include media("lg") {
@@ -72,6 +74,20 @@
 
     p {
       width: 100%;
+    }
+    p:nth-child(3) {
+      text-align: center;
+      flex-shrink: 2;
+      margin-right: 10px;
+
+      @include media("sm") {
+        flex-shrink: 1;
+        margin-right: 0;
+      }
+    }
+
+    p:nth-child(4) {
+      text-align: center;
     }
   }
 }

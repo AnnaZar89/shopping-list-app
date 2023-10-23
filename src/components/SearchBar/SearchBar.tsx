@@ -6,6 +6,7 @@ export interface INewItem {
   checked: boolean;
   id: {};
   quantity: number;
+  unit: string;
 }
 
 interface ISearchBar {
@@ -15,6 +16,7 @@ interface ISearchBar {
 const SearchBar: FC<ISearchBar> = ({ onAddItems, removeFromStorage }) => {
   const [value, setValue] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [unit, setUnit] = useState("piece");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,20 +26,27 @@ const SearchBar: FC<ISearchBar> = ({ onAddItems, removeFromStorage }) => {
       checked: false,
       id: new Date(),
       quantity,
+      unit,
     };
     onAddItems(newItem);
     setQuantity(1);
     setValue("");
+    setUnit("piece");
   };
 
   return (
     <form className={styles.element} onSubmit={handleSubmit}>
       <div className={styles.searchBar}>
+        <select value={unit} onChange={(e) => setUnit(e.target.value)}>
+          <option value="piece">piece</option>
+          <option value="kg">kg</option>
+          <option value="gram">gram</option>
+        </select>
         <select
           onChange={(e) => setQuantity(Number(e.target.value))}
           value={quantity}
         >
-          {Array.from({ length: 20 }, (_, i) => i + 1).map((element, i) => (
+          {Array.from({ length: 1000 }, (_, i) => i + 1).map((element, i) => (
             <option value={element} key={i}>
               {element}
             </option>
